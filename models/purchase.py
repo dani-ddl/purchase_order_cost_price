@@ -23,8 +23,21 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         result = super(PurchaseOrderLine, self).onchange_product_id()
-        self.price_unit = self.product_id.standard_price
         logging.info('***** Precio venta *****')
+        logging.info(result)
         logging.info( self.price_unit)
+
         self.price_unit = self.product_id.standard_price
+
+        return result
+
+    @api.onchange('product_qty', 'product_uom')
+    def _onchange_quantity(self):
+        result = super(PurchaseOrderLine, self)._onchange_quantity()
+        logging.info('***** Precio venta df2 *****')
+        logging.info(result)
+        logging.info(self.price_unit)
+
+        self.price_unit = self.product_id.standard_price
+
         return result
