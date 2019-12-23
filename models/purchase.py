@@ -23,6 +23,8 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         result = super(PurchaseOrderLine, self).onchange_product_id()
-        if self.price_unit == 0.00:
-            self.price_unit = self.product_id.standard_price
+        self.price_unit = self.product_id.standard_price
+        logging.info('***** Precio venta *****')
+        logging.info( self.price_unit)
+        self.price_unit = self.product_id.standard_price
         return result
