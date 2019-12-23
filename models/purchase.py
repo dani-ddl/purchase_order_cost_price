@@ -25,8 +25,8 @@ class PurchaseOrderLine(models.Model):
         result = super(PurchaseOrderLine, self).onchange_product_id()
         #logging.info('***** Precio venta *****')
         #logging.info( self.price_unit)
-        if self.price_unit == 0.00:
-            self.price_unit = self.product_id.standard_price
+        #if self.price_unit == 0.00:
+        self.price_unit = self.product_id.standard_price
 
         return result
 
@@ -35,7 +35,9 @@ class PurchaseOrderLine(models.Model):
         result = super(PurchaseOrderLine, self)._onchange_quantity()
         #logging.info('***** Precio venta df2 *****')
         #logging.info(self.price_unit)
-        if self.price_unit == 0.00:
-            self.price_unit = self.product_id.standard_price
+        #if self.price_unit == 0.00:
+        self.price_unit = self.product_id.standard_price
+
+        logging.info(self.price_unit)
 
         return result
